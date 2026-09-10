@@ -69,7 +69,8 @@ Copies always go **one way**: from the NAS disk to a folder you choose.
 ## Install
 
 You need a Mac on macOS 14 or later, and the NAS drive in a USB dock or
-enclosure.
+enclosure. The release is a universal binary — Apple Silicon and Intel both
+run natively.
 
 ### Homebrew (easiest)
 
@@ -93,8 +94,6 @@ downloaded this way. To allow it once: **right-click the app → Open → Open**
 
 ### Build from source
 
-Works on both Apple Silicon and Intel.
-
 ```bash
 # Rust and the Tauri CLI
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
@@ -109,8 +108,12 @@ cargo tauri build --bundles app
 open ../../target/release/bundle/macos/*.app
 ```
 
-> Prebuilt binaries are Apple Silicon only for now. On an Intel Mac, build
-> from source — the code supports it, there just isn't a published build yet.
+To produce a universal build that runs on both Apple Silicon and Intel:
+
+```bash
+rustup target add x86_64-apple-darwin aarch64-apple-darwin
+cargo tauri build --target universal-apple-darwin --bundles app,dmg
+```
 
 ---
 
