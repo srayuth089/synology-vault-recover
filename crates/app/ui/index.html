@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>mac-btrfs-synology</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+  <div class="app">
+    <div class="titlebar">
+      <span class="name">mac-btrfs-synology</span>
+      <span class="ver">0.1.0</span>
+      <span class="spacer"></span>
+      <span class="ro-badge" id="roBadge">ยังไม่ได้เลือกดิสก์ต้นทาง</span>
+    </div>
+
+    <div class="bar">
+      <div class="end">
+        <div class="glyph">🖥</div>
+        <div>
+          <div class="who" id="destName">ยังไม่ได้เลือก</div>
+          <div class="role">ปลายทาง · เขียนได้</div>
+        </div>
+      </div>
+
+      <div class="mid">
+        <div class="action ghost" id="btnRescan">⟳ สแกนใหม่</div>
+        <div class="action primary" id="btnRecover" aria-disabled="true">← กู้ข้อมูล</div>
+      </div>
+
+      <div class="end right">
+        <div>
+          <div class="who" id="srcName">ยังไม่ได้เลือก</div>
+          <div class="role">ต้นทาง · อ่านอย่างเดียว</div>
+        </div>
+        <div class="glyph eject" id="btnEject" title="ถอดดิสก์อย่างปลอดภัย" hidden>⏏</div>
+        <div class="glyph">🔒</div>
+      </div>
+    </div>
+
+    <div class="bar2" id="progress" hidden>
+      <div class="prow">
+        <div class="pnum" id="pnum">0%</div>
+        <div class="pbar"><div class="pfill" id="pfill"></div></div>
+      </div>
+      <div class="ptext" id="ptext"></div>
+    </div>
+
+    <div class="panes">
+      <!-- LEFT: Mac disks -->
+      <div class="pane">
+        <div class="path">
+          <span class="nav" id="dstUp" title="ขึ้นหนึ่งชั้น">↑</span>
+          <div class="field" id="dstPath">…</div>
+          <span class="nav" id="dstPick" title="เลือกโฟลเดอร์อื่น">📂</span>
+        </div>
+        <div class="cols"><span>ชื่อ</span><span>ขนาด</span><span>ชนิด</span></div>
+        <div class="list" id="listMac"><div class="empty">กำลังเปิด…</div></div>
+      </div>
+
+      <!-- RIGHT: Synology source -->
+      <div class="pane">
+        <div class="path">
+          <span class="nav" id="srcUp" title="ขึ้นหนึ่งชั้น">↑</span>
+          <div class="field" id="srcPath">ดิสก์ Synology — เลือกต้นทาง</div>
+          <select class="field subvol" id="diskPick" hidden title="เลือกดิสก์"></select>
+          <select class="field subvol" id="subvolPick" hidden></select>
+        </div>
+        <div class="cols"><span>ชื่อ</span><span>ขนาด</span><span>ชนิด</span></div>
+        <div class="list" id="listSyno"><div class="empty">กำลังสแกน…</div></div>
+      </div>
+    </div>
+
+    <div class="status">
+      <span id="proof">ยังไม่ได้พิสูจน์สถานะอ่านอย่างเดียว</span>
+      <span id="stack">ชั้นข้อมูล —</span>
+      <span class="push" id="counts">พบดิสก์ 0</span>
+    </div>
+  </div>
+</div>
+<div class="menu" id="ctx" hidden></div>
+<script src="main.js"></script>
+</body>
+</html>

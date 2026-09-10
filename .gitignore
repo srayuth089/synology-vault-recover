@@ -1,0 +1,14 @@
+# Rust build output
+/target/
+**/target/
+
+# Tauri generated schemas (regenerated on every build)
+crates/app/gen/
+
+# macOS
+.DS_Store
+
+# Editor
+.idea/
+.vscode/
+*.swp
