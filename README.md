@@ -2,6 +2,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Platform: macOS 14+](https://img.shields.io/badge/Platform-macOS%2014%2B-lightgrey.svg)](#install)
+[![Homebrew](https://img.shields.io/badge/Homebrew-srayuth089%2Ftap-orange.svg)](#install)
 [![Buy me a coffee](https://img.shields.io/badge/Buy%20me%20a%20coffee-%E2%98%95-FFDD00.svg)](https://buymeacoffee.com/srayuth)
 
 Pull your files off a Synology NAS drive on a Mac — no NAS, no Linux, no VM.
@@ -34,7 +35,7 @@ screenshot are placeholders.*
 ## Status
 
 **Working, early.** It reads real Synology disks and copies real files out.
-It is not signed or notarized yet, so you build it yourself for now (see below).
+Install it with Homebrew in two lines — see [Install](#install).
 
 | Works | Not yet |
 |---|---|
@@ -67,26 +68,49 @@ Copies always go **one way**: from the NAS disk to a folder you choose.
 
 ## Install
 
-You need a Mac (Apple Silicon or Intel), macOS 14+, and the NAS drive in a
-USB dock or enclosure.
+You need a Mac on macOS 14 or later, and the NAS drive in a USB dock or
+enclosure.
+
+### Homebrew (easiest)
 
 ```bash
-# 1. Install Rust and the Tauri CLI
+brew tap srayuth089/tap
+brew install --cask synology-vault-recover
+```
+
+Then open it from Applications. Homebrew clears the download quarantine flag
+for you, so it launches without any security warning.
+
+### Download the app
+
+Grab the `.dmg` from
+[Releases](https://github.com/srayuth089/synology-vault-recover/releases)
+and drag it to Applications.
+
+Because the build is not notarized yet, macOS blocks it on first launch when
+downloaded this way. To allow it once: **right-click the app → Open → Open**.
+(Homebrew avoids this step, which is why it is recommended above.)
+
+### Build from source
+
+Works on both Apple Silicon and Intel.
+
+```bash
+# Rust and the Tauri CLI
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 cargo install tauri-cli --version "^2" --locked
 
-# 2. Build the app
+# Build
 git clone https://github.com/srayuth089/synology-vault-recover.git
 cd synology-vault-recover/crates/app
 cargo tauri build --bundles app
 
-# 3. Open it
+# Open
 open ../../target/release/bundle/macos/*.app
 ```
 
-Prebuilt `.app` bundles are attached to
-[Releases](https://github.com/srayuth089/synology-vault-recover/releases)
-when available.
+> Prebuilt binaries are Apple Silicon only for now. On an Intel Mac, build
+> from source — the code supports it, there just isn't a published build yet.
 
 ---
 
