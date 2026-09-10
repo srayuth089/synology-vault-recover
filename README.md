@@ -1,13 +1,28 @@
 # Synology Vault Recover
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Platform: macOS 14+](https://img.shields.io/badge/Platform-macOS%2014%2B-lightgrey.svg)](#install)
+[![Buy me a coffee](https://img.shields.io/badge/Buy%20me%20a%20coffee-%E2%98%95-FFDD00.svg)](https://buymeacoffee.com/srayuth)
+
 Pull your files off a Synology NAS drive on a Mac — no NAS, no Linux, no VM.
 
-When a Synology DiskStation dies, the drives still hold your data. But macOS
-cannot read them: Synology stacks **mdadm RAID → LVM → Btrfs**, and macOS has
-none of those. The usual advice is to build a Linux VM and learn `btrfs restore`.
+**Your DiskStation died. Your files did not.**
 
-This app reads that stack natively on macOS and gives you a two-pane file
-browser. Pick your files, right-click, download. That's it.
+That is the part nobody tells you while you are panicking. The NAS is dead,
+but the drives inside it are almost always fine — every photo, every video,
+every document is still sitting there, intact. The problem is purely that
+macOS cannot read them: Synology stacks **mdadm RAID → LVM → Btrfs**, and
+macOS speaks none of those. Plug the drive into a Mac and you get *"The disk
+you inserted was not readable."*
+
+The usual advice from here is to build a Linux virtual machine, pass the drive
+through, and run `btrfs restore` from a terminal — on the only copy of your
+data you have left. That is a bad night for anyone, and a genuinely frightening
+one if you are not a Linux person.
+
+This app skips all of that. Plug the drive in, open it, click the folder you
+want, and copy it out. The drive is opened read-only, so it cannot be made
+worse by trying.
 
 ![Synology Vault Recover — two-pane browser showing a NAS volume on the right and a local folder on the left](docs/screenshot.png)
 
@@ -183,6 +198,45 @@ A few things worth knowing before you start:
 Compression support (zlib, lzo, zstd) is the single most useful thing anyone
 could add — Synology enables it on many volumes, and files that use it
 currently cannot be extracted.
+
+---
+
+## Why this exists
+
+My own DiskStation died with years of photos and family video on it. Every
+answer I could find said the same thing: build a Linux VM, pass the drive
+through, and hope you type `btrfs restore` correctly. I did that. It worked,
+eventually — after a lot of late nights reading on-disk format specs and
+staring at hex dumps, terrified of touching the one copy of the data I had
+left.
+
+Nobody should have to become a filesystem archaeologist just to get their own
+photos back. So I wrote this: three layers of parsers, from scratch, so the
+next person can plug the drive in, click the folder they want, and be done.
+
+## ☕ If this got your files back
+
+<a href="https://buymeacoffee.com/srayuth">
+  <img src="docs/buymeacoffee-qr.png" alt="Buy me a coffee — buymeacoffee.com/srayuth" width="160" align="left" hspace="18" vspace="4">
+</a>
+
+Data recovery services quote hundreds of dollars for a RAID job like this, and
+plenty of people quietly give up on their photos instead of paying it.
+
+This is free, and it stays free. But if it just handed you back wedding photos,
+or years of your kids growing up, or the only copy of something you thought was
+gone — **a coffee would honestly mean a lot.**
+
+### **[buymeacoffee.com/srayuth](https://buymeacoffee.com/srayuth)**
+
+Every coffee goes straight back in: more drives to test against, an Apple
+Developer ID so the app opens without the right-click dance, and the
+compression work that would rescue the files it currently has to skip.
+
+Can't donate? A ⭐ costs nothing, and telling the next person with a dead NAS
+that this exists helps more than you would think.
+
+<br clear="left">
 
 ---
 
